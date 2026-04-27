@@ -11,12 +11,14 @@
 
     <style>
         :root {
-            --pastel-rose: #FFD1DC;
+            /* Mise à jour des couleurs vers le thème doré/beige */
+            --pastel-rose: #A89B85; /* Doré/Beige du thème */
+            --accent-couleur: #8A7B65; /* Doré plus sombre pour le hover */
+
+            --blanc-pur: #FFFFFF;
+            --texte-gris: #455A64;
             --pastel-jaune: #FFF9C4;
             --vert-tendre: #C8E6C9;
-            --blanc-pur: #FFFFFF; /* Blanc pur sans filtre bleu */
-            --texte-gris: #455A64;
-            --accent-couleur: #FF8A80;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -35,7 +37,7 @@
             position: relative;
             width: 100%;
             height: 100%;
-            background-color: var(--blanc-pur); /* Suppression du filtre bleu */
+            background-color: var(--blanc-pur);
             transform-style: preserve-3d;
             transform-origin: left center;
             transition: transform 1.5s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -55,7 +57,7 @@
             background-position: center center;
             background-size: cover;
             background-repeat: no-repeat;
-            opacity: 0.15; /* Très léger pour la clarté */
+            opacity: 0.15;
         }
 
         /* --- PLUIE DE COULEURS --- */
@@ -99,14 +101,14 @@
 
         /* --- ARCHE GÉANTE --- */
         .photo-container {
-            width: 240px;   /* Encore plus grand (précédemment 180px) */
-            height: 340px;  /* Encore plus grand (précédemment 260px) */
+            width: 240px;
+            height: 340px;
             position: relative;
             margin-bottom: 25px;
             border: 4px solid #fff;
             background: #fff;
             box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-            border-top-left-radius: 120px; /* Arche parfaite pour 240px de large */
+            border-top-left-radius: 120px;
             border-top-right-radius: 120px;
             overflow: hidden;
         }
@@ -138,7 +140,7 @@
         .count-num {
             font-size: 1.3rem;
             font-weight: 700;
-            color: var(--accent-couleur);
+            color: var(--pastel-rose); /* Doré pour les chiffres */
         }
         .count-label {
             font-size: 0.65rem;
@@ -150,7 +152,7 @@
 
         /* --- BOUTON --- */
         .btn {
-            background-color: var(--pastel-rose);
+            background-color: var(--pastel-rose); /* Doré pour le bouton */
             color: #fff;
             text-decoration: none;
             padding: 16px 45px;
@@ -161,13 +163,13 @@
             border: none;
             font-weight: 700;
             border-radius: 50px;
-            box-shadow: 0 5px 20px rgba(255, 209, 220, 0.6);
+            box-shadow: 0 5px 20px rgba(168, 155, 133, 0.4);
         }
 
         .btn:hover {
             background-color: var(--accent-couleur);
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 138, 128, 0.4);
+            box-shadow: 0 8px 25px rgba(138, 123, 101, 0.3);
         }
 
         @media (max-width: 400px) {
@@ -207,16 +209,17 @@
         const diff = targetDate - now;
 
         if (diff > 0) {
-            document.getElementById("d").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-            document.getElementById("h").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            document.getElementById("m").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            document.getElementById("s").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+            document.getElementById("d").innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+            document.getElementById("h").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById("m").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById("s").innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
         }
     }, 1000);
 
     function createRain() {
         const container = document.getElementById('rain-container');
-        const colors = ['#FFD1DC', '#B3E5FC', '#FFF9C4', '#C8E6C9'];
+        // Pluie harmonisée avec le thème (Or, Blanc, Beige)
+        const colors = ['#A89B85', '#FFFFFF', '#EBE3D3', '#D1C4E9'];
         for (let i = 0; i < 40; i++) {
             const speck = document.createElement('div');
             speck.classList.add('rain-speck');
