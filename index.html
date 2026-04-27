@@ -11,10 +11,8 @@
 
     <style>
         :root {
-            /* Mise à jour des couleurs vers le thème doré/beige */
-            --pastel-rose: #A89B85; /* Doré/Beige du thème */
-            --accent-couleur: #8A7B65; /* Doré plus sombre pour le hover */
-
+            --pastel-rose: #A89B85; 
+            --accent-couleur: #8A7B65; 
             --blanc-pur: #FFFFFF;
             --texte-gris: #455A64;
             --pastel-jaune: #FFF9C4;
@@ -32,7 +30,6 @@
             perspective: 2000px;
         }
 
-        /* --- PAGE GLOBALE --- */
         #global-page-content {
             position: relative;
             width: 100%;
@@ -47,7 +44,6 @@
             transform: rotateY(-130deg);
         }
 
-        /* --- FOND --- */
         .background-container {
             position: absolute;
             top: 0; left: 0;
@@ -60,7 +56,6 @@
             opacity: 0.15;
         }
 
-        /* --- PLUIE DE COULEURS --- */
         #rain-container {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: 5; overflow: hidden;
@@ -76,7 +71,6 @@
             100% { transform: translateY(110vh); opacity: 0; }
         }
 
-        /* --- CONTENEUR CENTRAL --- */
         .card-wrapper {
             position: absolute;
             top: 50%;
@@ -99,7 +93,6 @@
             to { opacity: 1; transform: translate(-50%, -50%); }
         }
 
-        /* --- ARCHE GÉANTE --- */
         .photo-container {
             width: 240px;
             height: 340px;
@@ -118,7 +111,6 @@
             object-fit: cover; display: block;
         }
 
-        /* --- TITRE --- */
         h1 {
             font-family: 'Pinyon Script', cursive;
             font-size: 3.5rem;
@@ -127,7 +119,6 @@
             line-height: 1;
         }
 
-        /* --- COMPTEUR --- */
         .countdown {
             display: flex;
             gap: 20px;
@@ -140,7 +131,7 @@
         .count-num {
             font-size: 1.3rem;
             font-weight: 700;
-            color: var(--pastel-rose); /* Doré pour les chiffres */
+            color: var(--pastel-rose);
         }
         .count-label {
             font-size: 0.65rem;
@@ -150,9 +141,8 @@
             opacity: 0.8;
         }
 
-        /* --- BOUTON --- */
         .btn {
-            background-color: var(--pastel-rose); /* Doré pour le bouton */
+            background-color: var(--pastel-rose);
             color: #fff;
             text-decoration: none;
             padding: 16px 45px;
@@ -164,6 +154,7 @@
             font-weight: 700;
             border-radius: 50px;
             box-shadow: 0 5px 20px rgba(168, 155, 133, 0.4);
+            cursor: pointer;
         }
 
         .btn:hover {
@@ -192,10 +183,10 @@
         <h1>Clara & Gregory</h1>
 
         <div class="countdown" id="countdown">
-            <div class="count-box"><span class="count-num" id="d">00</span><span class="count-label">Jours</span></div>
-            <div class="count-box"><span class="count-num" id="h">00</span><span class="count-label">Hrs</span></div>
-            <div class="count-box"><span class="count-num" id="m">00</span><span class="count-label">Min</span></div>
-            <div class="count-box"><span class="count-num" id="s">00</span><span class="count-label">Sec</span></div>
+            <div class="count-box"><span class="count-num" id="d">--</span><span class="count-label">Jours</span></div>
+            <div class="count-box"><span class="count-num" id="h">--</span><span class="count-label">Hrs</span></div>
+            <div class="count-box"><span class="count-num" id="m">--</span><span class="count-label">Min</span></div>
+            <div class="count-box"><span class="count-num" id="s">--</span><span class="count-label">Sec</span></div>
         </div>
 
         <a href="invitation.html" class="btn" id="open-btn">Découvrir l'invitation</a>
@@ -204,7 +195,9 @@
 
 <script>
     const targetDate = new Date(2026, 6, 13, 15, 0, 0).getTime();
-    setInterval(() => {
+
+    // Fonction de mise à jour immédiate
+    function updateCountdown() {
         const now = new Date().getTime();
         const diff = targetDate - now;
 
@@ -214,11 +207,15 @@
             document.getElementById("m").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
             document.getElementById("s").innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
         }
-    }, 1000);
+    }
+
+    // On lance la fonction de suite au chargement
+    updateCountdown();
+    // Puis on l'automatise chaque seconde
+    setInterval(updateCountdown, 1000);
 
     function createRain() {
         const container = document.getElementById('rain-container');
-        // Pluie harmonisée avec le thème (Or, Blanc, Beige)
         const colors = ['#A89B85', '#FFFFFF', '#EBE3D3', '#D1C4E9'];
         for (let i = 0; i < 40; i++) {
             const speck = document.createElement('div');
