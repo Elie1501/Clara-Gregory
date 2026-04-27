@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mariage de Clara & Grégory</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #F9F9F9;
+            --gold-flowers: #A89B85;
+            --text-color: #2D2D2D;
+            --font-script: 'Great Vibes', cursive;
+            --font-serif: 'Cinzel', serif;
+            --font-main: 'Cormorant Garamond', serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            width: 100%;
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.5;
+        }
+
+        nav {
+            position: sticky; top: 0; width: 100%; z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 0;
+            display: flex; justify-content: center; gap: 20px;
+            border-bottom: 1px solid #EEE;
+        }
+        nav a {
+            text-decoration: none; color: #888;
+            font-family: 'Montserrat', sans-serif; text-transform: uppercase;
+            letter-spacing: 2px; font-size: 0.6rem; font-weight: 500;
+        }
+
+        .main-wrapper {
+            max-width: 500px;
+            margin: 0 auto; padding: 40px 15px 100px;
+            display: flex; flex-direction: column; gap: 50px;
+        }
+
+        .card {
+            position: relative;
+            width: 100%;
+            min-height: 600px;
+            background-color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 45px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url('bord.png');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.4;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .card.no-bg::before { display: none; }
+
+        .card-content { position: relative; z-index: 2; width: 100%; }
+
+        .together-text { font-family: var(--font-script); font-size: 1.8rem; color: var(--gold-flowers); margin-bottom: 5px; }
+        .sub-invite { font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 3px; font-size: 0.55rem; margin-bottom: 30px; color: #999; }
+        .couple-names { font-family: var(--font-serif); font-size: 1.8rem; letter-spacing: 6px; text-transform: uppercase; color: #1a1a1a; margin-bottom: 30px; line-height: 1.4; }
+        .details-text { text-transform: uppercase; letter-spacing: 2px; font-size: 0.65rem; margin-bottom: 20px; color: #555; }
+
+        .date-container { display: flex; align-items: center; justify-content: center; gap: 15px; margin: 20px 0; font-family: var(--font-serif); }
+        .date-line { width: 40px; height: 1px; background-color: #333; }
+        .date-day { font-size: 1.6rem; color: #1a1a1a; letter-spacing: 2px; }
+        .date-month { font-size: 0.75rem; color: #1a1a1a; letter-spacing: 3px; text-transform: uppercase; }
+
+        .location-text { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; line-height: 1.8; color: #333; margin-bottom: 10px; }
+        .v-h-text { font-style: italic; font-size: 0.85rem; color: var(--gold-flowers); margin-bottom: 20px; }
+
+        .btn-action { padding: 10px 25px; border: 1px solid #E0E0E0; text-decoration: none; color: #666; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; background: #FFF; position: relative; z-index: 5; display: inline-block; }
+        .btn-action:hover { border-color: var(--gold-flowers); color: var(--gold-flowers); }
+
+        /* FORMULAIRE STYLISÉ */
+        .floral-separator {
+            display: flex; align-items: center; justify-content: center;
+            gap: 15px; margin: 20px 0 35px; color: var(--gold-flowers);
+            opacity: 0.6; font-size: 0.8rem;
+        }
+        .floral-separator .line { width: 40px; height: 1px; background-color: var(--gold-flowers); }
+
+        .form-group { margin-bottom: 20px; text-align: left; }
+        .form-label {
+            display: block; font-family: 'Montserrat', sans-serif;
+            font-size: 0.55rem; text-transform: uppercase; letter-spacing: 2px;
+            color: var(--gold-flowers); margin-bottom: 6px; font-weight: 600;
+        }
+
+        form input, form select {
+            width: 100%; border: none !important; border-bottom: 1px solid #EEE !important;
+            padding: 10px 0 !important; font-family: var(--font-main) !important;
+            font-size: 0.95rem !important; color: #333 !important;
+            text-align: left !important; outline: none; background: transparent;
+        }
+
+        .btn-submit-gold {
+            width: 100%; margin-top: 25px; padding: 15px;
+            background-color: var(--gold-flowers); color: white; border: none;
+            font-family: 'Cinzel', serif; text-transform: uppercase;
+            letter-spacing: 3px; font-size: 0.7rem; cursor: pointer;
+            transition: all 0.4s ease;
+        }
+        .btn-submit-gold:hover { background-color: #8A7B65; box-shadow: 0 5px 15px rgba(168, 155, 133, 0.2); }
+
+        .reveal { opacity: 0; transform: translateY(20px); transition: 1s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .music-btn { position: fixed; bottom: 30px; right: 30px; z-index: 9999; width: 40px; height: 40px; border-radius: 50%; background: white; border: 1px solid #EEE; cursor: pointer; }
+        .grand-parents { margin-top: 20px; font-size: 0.75rem; line-height: 1.6; border-top: 1px solid #F0F0F0; padding-top: 15px; }
+    </style>
+</head>
+<body>
+
+<audio id="bg-music" loop><source src="musique3.mp3" type="audio/mpeg"></audio>
+<button id="music-toggle" class="music-btn" onclick="toggleMusic()"><i class="fa-solid fa-play"></i></button>
+
+<nav>
+    <a href="#mairie">Mairie</a>
+    <a href="#houppa">Houppa</a>
+    <a href="#confirmation">Réponses</a>
+</nav>
+
+<div class="main-wrapper">
+
+    <div id="mairie" class="card reveal">
+        <div class="card-content">
+            <div class="together-text">Together</div>
+            <div class="sub-invite">Famille HADDAD & Famille KRISSI</div>
+            <div class="couple-names">Clara<br>&<br>Grégory</div>
+            <div class="details-text">Ont la joie de vous inviter à leur</div>
+            <div class="details-text" style="font-weight: 700; color: #000;">Mariage Civil</div>
+
+            <div class="date-container">
+                <div class="date-month">Juillet</div>
+                <div class="date-line"></div>
+                <div class="date-day">13</div>
+                <div class="date-line"></div>
+                <div class="date-month">2026</div>
+            </div>
+
+            <div class="location-text">
+                Mairie du 16ème Arrondissement<br>
+                À 15h00
+            </div>
+            <div class="v-h-text">Suivie d'un Vin d'Honneur dans la salle de la Mairie</div>
+            <a href="https://waze.com/ul?q=Mairie%20du%2016e%20Paris" target="_blank" class="btn-action">Localisation</a>
+        </div>
+    </div>
+
+    <div id="houppa" class="card reveal">
+        <div class="card-content">
+            <div class="together-text">Union</div>
+            <div class="sub-invite">Sous la Houppa</div>
+            <div class="couple-names">Clara<br>&<br>Grégory</div>
+
+            <div class="date-container">
+                <div class="date-month">Juillet</div>
+                <div class="date-line"></div>
+                <div class="date-day">26</div>
+                <div class="date-line"></div>
+                <div class="date-month">2026</div>
+            </div>
+
+            <div class="details-text">À PARTIR DE 17H00</div>
+            <div class="location-text">
+                Château du Bois du Rocher<br>
+                91350 Jouy-en-Josas
+            </div>
+
+            <div class="grand-parents">
+                <p style="text-transform: uppercase; font-weight: 600; margin-bottom: 5px;">En pensée avec nos Grands-Parents</p>
+                <p>À venir...</p>
+            </div>
+
+            <a href="https://waze.com/ul?q=Chateau%20du%20Bois%20du%20Rocher" target="_blank" class="btn-action" style="margin-top:20px;">Localisation</a>
+        </div>
+    </div>
+
+    <div id="confirmation" class="card reveal no-bg">
+        <div class="card-content">
+            <div class="couple-names" style="font-size: 1.5rem; margin-bottom: 10px;">Réponses</div>
+            <div class="sub-invite">Merci de confirmer avant le 1er Juin</div>
+
+            <div class="floral-separator">
+                <i class="fa-solid fa-leaf"></i>
+                <span class="line"></span>
+                <i class="fa-solid fa-seedling"></i>
+                <span class="line"></span>
+                <i class="fa-solid fa-leaf"></i>
+            </div>
+
+            <form id="rsvpForm">
+                <div class="form-group">
+                    <label class="form-label">Nom & Prénom</label>
+                    <input type="text" placeholder="Votre nom" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Présence</label>
+                    <select required>
+                        <option value="" disabled selected>Choisir une option</option>
+                        <option value="oui">Présent(e) avec joie</option>
+                        <option value="non">Hélas impossible</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Nombre d'invités</label>
+                    <select>
+                        <option value="1">1 Personne</option>
+                        <option value="2">2 Personnes</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-submit-gold">Envoyer ma réponse</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const audio = document.getElementById("bg-music");
+    let isPlaying = false;
+    function toggleMusic() {
+        if (isPlaying) {
+            audio.pause();
+            document.getElementById("music-toggle").innerHTML = '<i class="fa-solid fa-play"></i>';
+        } else {
+            audio.play();
+            document.getElementById("music-toggle").innerHTML = '<i class="fa-solid fa-pause"></i>';
+        }
+        isPlaying = !isPlaying;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
