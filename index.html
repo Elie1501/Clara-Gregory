@@ -28,7 +28,7 @@
             perspective: 2000px;
         }
 
-        /* --- CONTENEUR DE LA PAGE (COUVERTURE) --- */
+        /* --- CONTENEUR DE LA PAGE --- */
         #global-page-content {
             position: relative;
             width: 100%;
@@ -48,7 +48,7 @@
             opacity: 0.5;
         }
 
-        /* --- FOND FLORAL --- */
+        /* --- FOND FLORAL RESPONSIVE --- */
         .background-container {
             position: absolute;
             top: 0; left: 0;
@@ -56,7 +56,7 @@
             z-index: 0;
             background-image: url('Cadre-floral-or.png');
             background-position: center center;
-            background-size: cover;
+            background-size: cover; /* S'adapte à la taille de l'écran */
             background-repeat: no-repeat;
         }
 
@@ -76,32 +76,44 @@
             100% { transform: translateY(110vh); opacity: 0; }
         }
 
-        /* --- CONTENU --- */
+        /* --- CONTENU ADAPTATIF --- */
         .content-inner {
             position: relative;
             z-index: 10;
             text-align: center;
             padding: 20px;
+            width: 100%;
+            max-width: 600px; /* Évite que le contenu s'étale trop sur PC */
         }
 
         h1 {
             font-family: 'Pinyon Script', cursive;
-            font-size: clamp(3rem, 12vw, 5rem);
-            color: var(--or-luxe); /* Texte en Or pour le prestige */
-            margin-bottom: 20px;
+            /* clamp(min, pref, max) : Taille fluide selon la largeur de l'écran */
+            font-size: clamp(2.5rem, 10vw, 5rem); 
+            color: var(--or-luxe);
+            margin-bottom: clamp(15px, 4vh, 30px);
             text-shadow: 0px 1px 2px rgba(0,0,0,0.1);
+            line-height: 1.2;
         }
 
         .countdown {
             display: flex;
-            gap: 15px;
-            margin-bottom: 45px;
+            gap: clamp(10px, 3vw, 20px);
+            margin-bottom: clamp(30px, 6vh, 50px);
             color: var(--texte-sombre);
             justify-content: center;
+            flex-wrap: nowrap; /* Garde les chiffres sur une ligne */
         }
-        .count-box { display: flex; flex-direction: column; align-items: center; min-width: 55px; }
+
+        .count-box { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            min-width: clamp(45px, 12vw, 70px); 
+        }
+
         .count-num {
-            font-size: 1.8rem;
+            font-size: clamp(1.4rem, 5vw, 2.2rem);
             font-weight: 600;
             color: var(--texte-sombre);
             border-bottom: 1.5px solid var(--or-luxe);
@@ -109,36 +121,52 @@
             margin-bottom: 5px;
             width: 100%;
         }
+
         .count-label {
-            font-size: 0.65rem;
+            font-size: clamp(0.5rem, 2vw, 0.7rem);
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             color: var(--or-luxe);
             font-weight: 700;
         }
 
-        /* --- BOUTON AJUSTÉ --- */
+        /* --- BOUTON RESPONSIVE --- */
         .btn {
             display: inline-block;
-            background-color: var(--or-luxe); /* Bouton Or */
+            background-color: var(--or-luxe);
             color: #fff;
             text-decoration: none;
-            padding: 16px 40px;
-            font-size: 0.75rem;
+            padding: clamp(12px, 3vh, 18px) clamp(25px, 6vw, 45px);
+            font-size: clamp(0.65rem, 2.5vw, 0.8rem);
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             font-weight: 600;
             border: 1px solid var(--or-luxe);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: all 0.4s ease;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(160, 137, 84, 0.3);
+            white-space: nowrap;
         }
 
         .btn:hover {
-            background-color: var(--texte-sombre); /* Devient noir au survol */
+            background-color: var(--texte-sombre);
             border-color: var(--texte-sombre);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* --- MEDIA QUERIES PETITS ECRANS (Mobile Portrait) --- */
+        @media (max-width: 360px) {
+            .countdown { gap: 8px; }
+            .count-box { min-width: 40px; }
+            h1 { margin-bottom: 15px; }
+        }
+
+        /* --- MEDIA QUERIES ECRAN LARGE (PC) --- */
+        @media (min-width: 1024px) {
+            .background-container {
+                background-size: contain; /* Évite de trop zoomer l'image sur grand écran */
+                background-color: var(--blanc-creme);
+            }
         }
     </style>
 </head>
@@ -163,7 +191,6 @@
 </div>
 
 <script>
-    // Timer pour le 26 Juillet 2026 (Date Houppa)
     const targetDate = new Date(2026, 6, 26, 17, 0, 0).getTime();
 
     function updateCountdown() {
@@ -181,7 +208,8 @@
 
     function createGoldRain() {
         const container = document.getElementById('gold-rain-container');
-        for (let i = 0; i < 35; i++) {
+        const speckCount = window.innerWidth < 480 ? 20 : 35; // Moins de particules sur mobile pour la fluidité
+        for (let i = 0; i < speckCount; i++) {
             const speck = document.createElement('div');
             speck.classList.add('gold-speck');
             speck.style.left = Math.random() * 100 + '%';
