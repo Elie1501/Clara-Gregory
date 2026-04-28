@@ -3,38 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Mariage de Clara & Gregory</title>
-
+    <title>Mariage de Clara & Grégory</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
-
     <style>
-        :root {
-            --pastel-rose: #A89B85;
-            --accent-couleur: #8A7B65;
-            --blanc-pur: #FFFFFF;
-            --texte-gris: #455A64;
-            --pastel-jaune: #FFF9C4;
-            --vert-tendre: #C8E6C9;
-        }
-
+        :root { --or-luxe: #A08954; --or-clair: #D4C59A; --blanc-creme: #FFFEFA; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body, html {
-            height: 100%;
-            width: 100%;
-            font-family: 'Cormorant Garamond', serif;
-            background-color: var(--blanc-pur);
-            overflow: hidden;
-            perspective: 2000px;
-        }
+        body, html { height: 100%; width: 100%; font-family: 'Cormorant Garamond', serif; background-color: #000; overflow: hidden; perspective: 2000px; }
 
         #global-page-content {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            background-color: var(--blanc-pur);
+            position: relative; width: 100%; height: 100%;
+            transform-style: preserve-3d; transform-origin: left center;
+            transition: transform 1.5s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 1s ease;
+        }
+
+        .page-turn-active { transform: rotateY(-110deg); opacity: 0; }
+
+        .background-container {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('assis.JPG');
+            background-position: center center; background-size: cover; background-repeat: no-repeat;
+        }
+
+        #gold-rain-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; overflow: hidden; }
+        .gold-speck { position: absolute; width: 2px; height: 2px; background-color: var(--or-clair); border-radius: 50%; opacity: 0; animation: fall linear infinite; }
+        @keyframes fall { 0% { transform: translateY(-10vh); opacity: 0; } 20% { opacity: 0.8; } 100% { transform: translateY(110vh); opacity: 0; } }
+
+        .card-wrapper {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10;
+            width: 90%; max-width: 400px; padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2); text-align: center;
+        }
+
+        h1 { font-family: 'Pinyon Script', cursive; font-size: 3.5rem; color: #fff; margin-bottom: 20px; text-shadow: 2px 2px 10px rgba(0,0,0,0.3); }
+        .countdown { display: flex; gap: 20px; margin-bottom: 35px; color: #fff; justify-content: center; }
+        .count-box { display: flex; flex-direction: column; align-items: center; min-width: 50px; }
+        .count-num { font-size: 1.8rem; border-bottom: 1px solid var(--or-luxe); padding-bottom: 5px; margin-bottom: 5px; }
+        .count-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; }
+
+        .btn {
+            display: inline-block; background-color: var(--or-luxe); color: #fff; text-decoration: none;
+            padding: 15px 40px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px;
+            font-weight: 600; border: 1px solid var(--or-luxe); transition: 0.4s;
+        }
+        .btn:hover { background-color: transparent; border-color: #fff; color: #fff; }
+    </style>
+</head>
+<body>
+<div id="global-page-content">
+    <div class="background-container"></div>
+    <div id="gold-rain-container"></div>
+    <div class="card-wrapper">
+        <h1>Clara & Grégory</h1>
+        <div class="countdown" id="countdown">
+            <div class="count-box"><span class="count-num" id="d">00</span><span class="count-label">Jours</span></div>
+            <div class="count-box"><span class="count-num" id="h">00</span><span class="count-label">Hrs</span></div>
+            <div class="count-box"><span class="count-num" id="m">00</span><span class="count-label">Min</span></div>
+            <div class="count-box"><span class="count-num" id="s">00</span><span class="count-label">Sec</span></div>
+        </div>
+        <a href="premiere-page.html" class="btn" id="open-btn">Découvrir l'invitation</a>
+    </div>
+</div>
+<script>
+    const targetDate = new Date(2026, 6, 26, 17, 0, 0).getTime();
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const diff = targetDate - now;
+        if (diff > 0) {
+            document.getElementById("d").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById("h").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById("m").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById("s").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+        }
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    function createGoldRain() {
+        const container = document.getElementById('gold-rain-container');
+        for (let i = 0; i < 40; i++) {
+            const speck = document.createElement('div');
+            speck.classList.add('gold-speck');
+            speck.style.left = Math.random() * 100 + '%';
+            speck.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            speck.style.animationDelay = (Math.random() * 5) + 's';
+            container.appendChild(speck);
+        }
+    }
+    createGoldRain();
+
+    document.getElementById('open-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        const link = this.getAttribute('href');
+        document.getElementById('global-page-content').classList.add('page-turn-active');
+        setTimeout(() => { window.location.href = link; }, 1200);
+    });
+</script>
+</body>
+</html>            background-color: var(--blanc-pur);
             transform-style: preserve-3d;
             transform-origin: left center;
             transition: transform 1.5s cubic-bezier(0.645, 0.045, 0.355, 1);
