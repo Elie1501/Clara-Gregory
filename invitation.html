@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitation Clara & Grégory</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #b08d57;
+            --text-dark: #333;
+            --text-light: #5d5d5d;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #fdfbf7;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Conteneur principal adaptatif */
+        .invitation-container {
+            position: relative;
+            width: 95%;
+            max-width: 700px; /* Largeur max sur grand écran */
+            min-height: 90vh;
+            margin: 20px auto;
+            background: #fff url('fondClara.svg') no-repeat center center;
+            background-size: cover;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 60px 40px;
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+
+        /* Ajustement des textes en fonction de la taille de l'écran */
+        .families {
+            font-size: clamp(0.8rem, 2vw, 1rem);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        .names {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(3rem, 10vw, 5rem); /* Taille fluide */
+            color: var(--gold);
+            margin: 10px 0;
+        }
+
+        .section-title {
+            font-weight: 400;
+            font-size: clamp(1.1rem, 4vw, 1.4rem);
+            margin-top: 25px;
+            color: var(--text-dark);
+            border-bottom: 1px solid rgba(176, 141, 87, 0.3);
+            padding-bottom: 5px;
+            width: 70%;
+        }
+
+        .details {
+            font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+            line-height: 1.5;
+            margin: 12px 0;
+            color: #444;
+        }
+
+        .highlight {
+            font-weight: 600;
+            color: #000;
+        }
+
+        /* Formulaire responsive */
+        .form-container {
+            margin-top: auto; /* Pousse le formulaire vers le bas */
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            border-radius: 12px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        input {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        button {
+            padding: 12px;
+            background-color: var(--gold);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #8e7145;
+        }
+
+        /* Media Queries pour mobiles très petits */
+        @media (max-width: 480px) {
+            .invitation-container {
+                padding: 40px 20px;
+                width: 100%;
+                margin: 0;
+                min-height: 100vh;
+                border-radius: 0;
+            }
+            .section-title {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="invitation-container">
+    <div class="families">
+        Famille KRISSI &bull; Famille HADDAD
+    </div>
+
+    <div class="names">Clara & Grégory</div>
+
+    <p class="details">Ont la joie de vous inviter à célébrer leur bonheur</p>
+
+    <h2 class="section-title">Mariage Civil</h2>
+    <p class="details">
+        <span class="highlight">Lundi 13 Juillet 2026 à 14h30</span><br>
+        Mairie du 16ème Arrondissement de Paris<br>
+        <small>Suivi d'un vin d'honneur sur place</small>
+    </p>
+
+    <h2 class="section-title">Houppa & Soirée</h2>
+    <p class="details">
+        <span class="highlight">Dimanche 26 Juillet 2026</span><br>
+        À partir de 17h00<br>
+        Château du Bois du Rocher
+    </p>
+
+    <p style="font-size: 0.85rem; color: #777; margin: 15px 0;">
+        [Noms des grands-parents]
+    </p>
+
+    <div class="form-container">
+        <p style="margin-bottom: 15px; font-weight: 600;">Réponse souhaitée avant le 1er juin</p>
+        <form class="form-group">
+            <input type="text" placeholder="Nom et Prénom" required>
+            <input type="number" placeholder="Nombre d'adultes" min="1">
+            <button type="submit">Confirmer ma présence</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
