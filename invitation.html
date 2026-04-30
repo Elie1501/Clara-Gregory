@@ -27,6 +27,14 @@
             font-family: var(--font-main);
             color: var(--text-color);
             background-color: #F8F7F5;
+            /* Animation d'ouverture de page */
+            opacity: 0;
+            animation: fadeInPage 1.5s ease-out forwards;
+        }
+
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* --- NAVIGATION --- */
@@ -60,6 +68,262 @@
             background-size: 100% 100%;
             background-position: center;
             background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .card-content {
+            width: 85%;
+            max-width: 320px;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .together-text { font-family: var(--font-script); font-size: 2.5rem; color: var(--gold-flowers); line-height: 1; }
+        .sub-invite { font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 3px; font-size: 0.55rem; color: #888; }
+        .couple-names { font-family: var(--font-serif); font-size: 1.8rem; letter-spacing: 5px; text-transform: uppercase; color: #1a1a1a; line-height: 1.2; margin: 5px 0; }
+
+        .date-container { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 10px 0; font-family: var(--font-serif); }
+        .date-line { width: 25px; height: 1px; background-color: var(--gold-flowers); }
+        .date-day { font-size: 1.8rem; color: #1a1a1a; }
+        .date-month { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; }
+
+        .location-text { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.2px; line-height: 1.5; color: #333; }
+        .v-h-text { font-style: italic; font-size: 0.85rem; color: var(--gold-flowers); }
+
+        .btn-action {
+            padding: 10px 20px; border: 1px solid #1a1a1a; text-decoration: none;
+            color: #1a1a1a; font-size: 0.6rem; text-transform: uppercase;
+            letter-spacing: 2px; background: rgba(255,255,255,0.4); align-self: center;
+        }
+
+        .btn-calendar {
+            background: none; border: none; color: var(--gold-flowers);
+            font-family: 'Montserrat', sans-serif; font-size: 0.55rem;
+            text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
+            text-decoration: underline; margin-top: 5px;
+        }
+
+        .grand-parents {
+            margin-top: 5px; padding-top: 10px;
+            border-top: 1px solid rgba(168, 155, 133, 0.2);
+        }
+        .grand-parents p:first-child { text-transform: uppercase; font-weight: 700; font-size: 0.55rem; letter-spacing: 1px; color: var(--gold-flowers); margin-bottom: 3px; }
+        .grand-parents p:last-child { font-size: 0.7rem; font-style: italic; color: #666; }
+
+        /* --- FORMULAIRE --- */
+        .form-group { margin-bottom: 20px; text-align: center; }
+        .form-label {
+            display: block; font-family: 'Montserrat', sans-serif; font-size: 0.65rem;
+            text-transform: uppercase; letter-spacing: 2px; color: var(--gold-flowers);
+            margin-bottom: 12px; font-weight: 700;
+        }
+
+        .input-underline {
+            width: 100%; border: none; border-bottom: 1px solid #CCC;
+            padding: 8px 0; font-family: var(--font-main); font-size: 1.1rem;
+            background: transparent; outline: none; text-align: center;
+        }
+
+        .chips-group { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .chip-item input { display: none; }
+        .chip-label {
+            display: inline-block; padding: 8px 18px; border: 1px solid #DDD;
+            font-family: 'Montserrat', sans-serif; font-size: 0.6rem; text-transform: uppercase;
+            cursor: pointer; border-radius: 20px; color: #888; background: white;
+        }
+        .chip-item input:checked + .chip-label {
+            background: var(--gold-flowers); border-color: var(--gold-flowers); color: white;
+        }
+
+        #other-guests-wrap { display: none; margin-top: 15px; }
+
+        .btn-submit-luxury {
+            width: 100%; padding: 16px; background-color: #1a1a1a; color: white;
+            border: none; font-family: var(--font-serif); text-transform: uppercase;
+            letter-spacing: 3px; font-size: 0.8rem; cursor: pointer;
+        }
+
+        .reveal { opacity: 0; transform: translateY(20px); transition: 1s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .music-btn { position: fixed; bottom: 20px; right: 20px; z-index: 999; width: 40px; height: 40px; border-radius: 50%; background: white; border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<audio id="bg-music" loop><source src="musique3.mp3" type="audio/mpeg"></audio>
+<button id="music-toggle" class="music-btn" onclick="toggleMusic()"><i class="fa-solid fa-play"></i></button>
+
+<nav>
+    <a href="#mairie">Mairie</a>
+    <a href="#houppa">Houppa</a>
+    <a href="#confirmation">RSVP</a>
+</nav>
+
+<div class="main-wrapper">
+
+    <!-- CARTE MAIRIE -->
+    <div id="mairie" class="card reveal">
+        <div class="card-content">
+            <div class="together-text">Together</div>
+            <div class="sub-invite">Famille HADDAD & Famille KRISSI</div>
+            <div class="couple-names">Clara<br>&<br>Grégory</div>
+            <div class="sub-invite" style="color:var(--gold-flowers); font-weight:700;">Mariage Civil</div>
+            <div class="date-container">
+                <div class="date-month">Juillet</div>
+                <div class="date-line"></div>
+                <div class="date-day">13</div>
+                <div class="date-line"></div>
+                <div class="date-month">2026</div>
+            </div>
+            <div class="location-text">Mairie du 16ème Arrondissement<br>À 14h30</div>
+            <div class="v-h-text">Suivie d'un Vin d'Honneur</div>
+            <a href="https://waze.com/ul?q=Mairie%20du%2016e%20Paris" target="_blank" class="btn-action">Localisation</a>
+            
+            <!-- BOUTON CALENDRIER DIRECT -->
+            <button class="btn-calendar" onclick="addToCalendar('Mariage Civil Clara & Grégory', '20260713T143000', '20260713T170000', 'Mairie du 16ème, Paris', 'Mariage civil suivi du vin d\'honneur.')">
+                <i class="fa-regular fa-calendar-plus"></i> Ajouter au calendrier
+            </button>
+        </div>
+    </div>
+
+    <!-- CARTE HOUPPA -->
+    <div id="houppa" class="card reveal">
+        <div class="card-content">
+            <div class="together-text">Union</div>
+            <div class="sub-invite">Sous la Houppa</div>
+            <div class="couple-names">Clara<br>&<br>Grégory</div>
+            <div class="date-container">
+                <div class="date-month">Juillet</div>
+                <div class="date-line"></div>
+                <div class="date-day">26</div>
+                <div class="date-line"></div>
+                <div class="date-month">2026</div>
+            </div>
+            <div class="location-text"><strong>Château du Bois du Rocher</strong><br>Jouy-en-Josas À 17h30</div>
+            <div class="grand-parents">
+                <p>En pensée avec nos Grands-Parents</p>
+                <p>Mme & M. Krissi • Mme & M. Haddad</p>
+            </div>
+            <a href="https://waze.com/ul?q=Chateau%20du%20Bois%20du%20Rocher" target="_blank" class="btn-action">Localisation</a>
+            
+            <!-- BOUTON CALENDRIER DIRECT -->
+            <button class="btn-calendar" onclick="addToCalendar('Mariage Clara & Grégory - Houppa', '20260726T173000', '20260727T040000', 'Château du Bois du Rocher, Jouy-en-Josas', 'Cérémonie sous la Houppa suivie de la réception.')">
+                <i class="fa-regular fa-calendar-plus"></i> Ajouter au calendrier
+            </button>
+        </div>
+    </div>
+
+    <!-- RSVP -->
+    <div id="confirmation" class="card reveal">
+        <div class="card-content">
+            <div class="together-text" style="font-size: 2rem;">R.S.V.P</div>
+            <div class="sub-invite" style="margin-bottom: 10px;">Votre réponse avant le 01.06</div>
+
+            <form id="rsvpForm">
+                <div class="form-group">
+                    <label class="form-label">Votre Nom & Prénom</label>
+                    <input type="text" class="input-underline" placeholder="Ecrivez ici..." required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Serez-vous des nôtres ?</label>
+                    <div class="chips-group">
+                        <label class="chip-item">
+                            <input type="radio" name="presence" value="oui" required>
+                            <span class="chip-label">Avec joie</span>
+                        </label>
+                        <label class="chip-item">
+                            <input type="radio" name="presence" value="non">
+                            <span class="chip-label">Hélas non</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div id="guest-details">
+                    <div class="form-group">
+                        <label class="form-label">Nombre de personnes</label>
+                        <div class="chips-group">
+                            <label class="chip-item"><input type="radio" name="guests" value="1" checked><span class="chip-label">1</span></label>
+                            <label class="chip-item"><input type="radio" name="guests" value="2"><span class="chip-label">2</span></label>
+                            <label class="chip-item"><input type="radio" name="guests" value="autre"><span class="chip-label">Autre</span></label>
+                        </div>
+                        <div id="other-guests-wrap">
+                            <input type="number" id="other-guests-input" class="input-underline" placeholder="Précisez le nombre">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Régime / Allergies</label>
+                        <input type="text" class="input-underline" placeholder="Ex: Végétarien, Gluten...">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit-luxury">Confirmer</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Musique
+    const audio = document.getElementById("bg-music");
+    let isPlaying = false;
+    function toggleMusic() {
+        if (isPlaying) { audio.pause(); document.getElementById("music-toggle").innerHTML = '<i class="fa-solid fa-play"></i>'; }
+        else { audio.play(); document.getElementById("music-toggle").innerHTML = '<i class="fa-solid fa-pause"></i>'; }
+        isPlaying = !isPlaying;
+    }
+
+    // Animation au scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Formulaire RSVP dynamique
+    document.querySelectorAll('input[name="guests"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            document.getElementById('other-guests-wrap').style.display = (this.value === 'autre') ? 'block' : 'none';
+        });
+    });
+
+    document.querySelectorAll('input[name="presence"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            document.getElementById('guest-details').style.display = (this.value === 'non') ? 'none' : 'block';
+        });
+    });
+
+    // FONCTION CALENDRIER DIRECTE
+    function addToCalendar(title, start, end, location, description) {
+        const icsContent = [
+            "BEGIN:VCALENDAR",
+            "VERSION:2.0",
+            "BEGIN:VEVENT",
+            `SUMMARY:${title}`,
+            `DTSTART:${start}`,
+            `DTEND:${end}`,
+            `LOCATION:${location}`,
+            `DESCRIPTION:${description}`,
+            "END:VEVENT",
+            "END:VCALENDAR"
+        ].join("\n");
+
+        // Encode en Base64 pour simuler une ouverture de flux direct
+        const base64Content = btoa(unescape(encodeURIComponent(icsContent)));
+        window.location.href = "data:text/calendar;base64," + base64Content;
+    }
+</script>
+</body>
+</html>            background-repeat: no-repeat;
             display: flex;
             flex-direction: column;
             justify-content: center;
