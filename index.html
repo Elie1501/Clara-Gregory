@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Clara & Grégory - 26.07.2026</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
@@ -12,199 +11,84 @@
     <style>
         :root {
             --gold-flowers: #A89B85;
-            --text-color: #2D2D2D;
             --font-script: 'Great Vibes', cursive;
             --font-serif: 'Cinzel', serif;
-            --font-main: 'Cormorant Garamond', serif;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { height: 100vh; width: 100vw; margin: 0; overflow: hidden; background-color: #F8F7F5; }
 
-        /* On force le body à prendre toute la fenêtre sans scroll */
-        body, html {
-            height: 100vh;
-            width: 100vw;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #F8F7F5;
-        }
-
-        /* --- LE FOND QUI PREND TOUTE LA PLACE --- */
         .landing-container {
-            width: 100%;
-            height: 100%;
-            /* background-size: 100% 100% force l'image à remplir l'écran du tel */
+            width: 100%; height: 100%;
             background-image: url('fondfinal.png');
             background-size: 100% 100%;
             background-position: center;
-            background-repeat: no-repeat;
-
-            /* Centrage parfait du texte */
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
         }
 
-        /* --- ZONE DE TEXTE (Zone de sécurité pour éviter les fleurs étirées) --- */
         .hero-content {
-            width: 75%;
-            text-align: center;
+            width: 75%; text-align: center;
             animation: fadeIn 1.8s ease-out;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px; /* Espace régulier entre les éléments */
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .welcome-text {
-            font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-size: 0.65rem;
-            color: var(--gold-flowers);
-        }
+        /* Animation de sortie au clic */
+        .exit-active { opacity: 0; transform: scale(1.05) translateY(-10px); }
 
-        h1 {
-            font-family: var(--font-serif);
-            font-size: 2.1rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: #1a1a1a;
-            line-height: 1.1;
-        }
+        .welcome-text { font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 3px; font-size: 0.65rem; color: var(--gold-flowers); }
+        h1 { font-family: var(--font-serif); font-size: 2.1rem; letter-spacing: 4px; text-transform: uppercase; color: #1a1a1a; line-height: 1.1; }
+        .ampersand { font-family: var(--font-script); font-size: 3rem; color: var(--gold-flowers); line-height: 0.8; text-transform: lowercase; }
+        .date-hero { font-family: var(--font-serif); font-size: 1.1rem; letter-spacing: 3px; margin: 10px 0; border-top: 1px solid rgba(168, 155, 133, 0.25); border-bottom: 1px solid rgba(168, 155, 133, 0.25); padding: 10px 15px; }
 
-        .ampersand {
-            font-family: var(--font-script);
-            font-size: 3rem;
-            color: var(--gold-flowers);
-            line-height: 0.8;
-            text-transform: lowercase;
-        }
+        .countdown { display: flex; justify-content: center; gap: 15px; margin: 15px 0; }
+        .count-number { display: block; font-size: 1.7rem; font-weight: 300; color: #1a1a1a; }
+        .count-label { font-family: 'Montserrat', sans-serif; font-size: 0.5rem; text-transform: uppercase; color: var(--gold-flowers); }
 
-        .date-hero {
-            font-family: var(--font-serif);
-            font-size: 1.1rem;
-            letter-spacing: 3px;
-            margin: 10px 0;
-            border-top: 1px solid rgba(168, 155, 133, 0.25);
-            border-bottom: 1px solid rgba(168, 155, 133, 0.25);
-            padding: 10px 15px;
-            display: inline-block;
-        }
-
-        /* --- COMPTEUR --- */
-        .countdown {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 15px 0;
-        }
-
-        .count-item { min-width: 50px; }
-
-        .count-number {
-            display: block;
-            font-size: 1.7rem;
-            font-weight: 300;
-            color: #1a1a1a;
-            line-height: 1;
-        }
-
-        .count-label {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--gold-flowers);
-            margin-top: 5px;
-            display: block;
-        }
-
-        /* --- BOUTON LUXE --- */
         .enter-btn {
-            background-color: #1a1a1a;
-            color: #fff;
-            text-decoration: none;
-            padding: 15px 35px;
-            font-family: var(--font-serif);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            transition: 0.4s;
-            margin-top: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background-color: #1a1a1a; color: #fff; text-decoration: none; padding: 15px 35px;
+            font-family: var(--font-serif); font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 3px; transition: 0.4s; margin-top: 15px; cursor: pointer; border: none;
         }
 
-        .enter-btn:hover {
-            background-color: var(--gold-flowers);
-            transform: scale(1.05);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Ajustement pour les petits écrans iPhone SE ou similaires */
-        @media (max-height: 670px) {
-            h1 { font-size: 1.7rem; }
-            .ampersand { font-size: 2.2rem; }
-            .countdown { margin: 5px 0; }
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
 <div class="landing-container">
-    <div class="hero-content">
+    <div class="hero-content" id="mainHero">
         <p class="welcome-text">Bienvenue à l'invitation de</p>
-
         <h1>Clara <span class="ampersand">&</span> Grégory</h1>
-
         <div class="date-hero">26 Juillet 2026</div>
-
-        <div class="countdown" id="timer">
-            <div class="count-item">
-                <span class="count-number" id="days">00</span>
-                <span class="count-label">Jours</span>
-            </div>
-            <div class="count-item">
-                <span class="count-number" id="hours">00</span>
-                <span class="count-label">Heures</span>
-            </div>
-            <div class="count-item">
-                <span class="count-number" id="mins">00</span>
-                <span class="count-label">Min</span>
-            </div>
-            <div class="count-item">
-                <span class="count-number" id="secs">00</span>
-                <span class="count-label">Sec</span>
-            </div>
+        <div class="countdown">
+            <div class="count-item"><span class="count-number" id="days">00</span><span class="count-label">Jours</span></div>
+            <div class="count-item"><span class="count-number" id="hours">00</span><span class="count-label">Heures</span></div>
+            <div class="count-item"><span class="count-number" id="mins">00</span><span class="count-label">Min</span></div>
+            <div class="count-item"><span class="count-number" id="secs">00</span><span class="count-label">Sec</span></div>
         </div>
-
-        <a href="invitation.html" class="enter-btn">Ouvrir l’invitation</a>
+        <button onclick="transitionToInvite()" class="enter-btn">Ouvrir l’invitation</button>
     </div>
 </div>
 
 <script>
-    const weddingDate = new Date("July 26, 2026 17:00:00").getTime();
+    function transitionToInvite() {
+        document.getElementById('mainHero').classList.add('exit-active');
+        setTimeout(() => { window.location.href = 'invitation.html'; }, 800);
+    }
 
+    const weddingDate = new Date("July 26, 2026 17:30:00").getTime();
     function updateCountdown() {
         const now = new Date().getTime();
         const distance = weddingDate - now;
-
         const d = Math.floor(distance / (1000 * 60 * 60 * 24));
         const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const s = Math.floor((distance % (1000 * 60)) / 1000);
-
         document.getElementById("days").innerText = d.toString().padStart(2, '0');
         document.getElementById("hours").innerText = h.toString().padStart(2, '0');
         document.getElementById("mins").innerText = m.toString().padStart(2, '0');
         document.getElementById("secs").innerText = s.toString().padStart(2, '0');
     }
-
     setInterval(updateCountdown, 1000);
     updateCountdown();
 </script>
