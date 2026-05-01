@@ -26,28 +26,50 @@
         }
 
         .hero-content {
-            width: 75%; text-align: center;
+            width: 85%; text-align: center;
             animation: fadeIn 1.8s ease-out;
-            display: flex; flex-direction: column; align-items: center; gap: 10px;
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Animation de sortie au clic */
+        /* AJOUT DE L'ARCHE PHOTO */
+        .photo-arche {
+            width: 130px; /* Taille adaptée pour ne pas pousser le texte trop bas */
+            height: 170px;
+            background: #fff;
+            padding: 4px;
+            border: 1px solid rgba(168, 155, 133, 0.2);
+            border-radius: 65px 65px 0 0;
+            margin-bottom: 5px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            animation: floatArche 6s ease-in-out infinite;
+        }
+
+        .photo-arche img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            border-radius: 60px 60px 0 0;
+        }
+
         .exit-active { opacity: 0; transform: scale(1.05) translateY(-10px); }
 
-        .welcome-text { font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 3px; font-size: 0.65rem; color: var(--gold-flowers); }
-        h1 { font-family: var(--font-serif); font-size: 2.1rem; letter-spacing: 4px; text-transform: uppercase; color: #1a1a1a; line-height: 1.1; }
-        .ampersand { font-family: var(--font-script); font-size: 3rem; color: var(--gold-flowers); line-height: 0.8; text-transform: lowercase; }
-        .date-hero { font-family: var(--font-serif); font-size: 1.1rem; letter-spacing: 3px; margin: 10px 0; border-top: 1px solid rgba(168, 155, 133, 0.25); border-bottom: 1px solid rgba(168, 155, 133, 0.25); padding: 10px 15px; }
+        h1 { font-family: var(--font-serif); font-size: 1.6rem; letter-spacing: 3px; text-transform: uppercase; color: #1a1a1a; line-height: 1.1; margin: 0; }
+        .ampersand { font-family: var(--font-script); font-size: 2.2rem; color: var(--gold-flowers); line-height: 0.6; text-transform: lowercase; display: block; margin: 2px 0; }
 
-        .countdown { display: flex; justify-content: center; gap: 15px; margin: 15px 0; }
-        .count-number { display: block; font-size: 1.7rem; font-weight: 300; color: #1a1a1a; }
-        .count-label { font-family: 'Montserrat', sans-serif; font-size: 0.5rem; text-transform: uppercase; color: var(--gold-flowers); }
+        .countdown { display: flex; justify-content: center; gap: 12px; margin: 10px 0; }
+        .count-number { display: block; font-size: 1.4rem; font-weight: 300; color: #1a1a1a; line-height: 1; }
+        .count-label { font-family: 'Montserrat', sans-serif; font-size: 0.45rem; text-transform: uppercase; color: var(--gold-flowers); letter-spacing: 1px; }
 
         .enter-btn {
-            background-color: #1a1a1a; color: #fff; text-decoration: none; padding: 15px 35px;
-            font-family: var(--font-serif); font-size: 0.75rem; text-transform: uppercase;
-            letter-spacing: 3px; transition: 0.4s; margin-top: 15px; cursor: pointer; border: none;
+            background-color: #1a1a1a; color: #fff; text-decoration: none; padding: 12px 30px;
+            font-family: var(--font-serif); font-size: 0.65rem; text-transform: uppercase;
+            letter-spacing: 2px; transition: 0.4s; margin-top: 10px; cursor: pointer; border: none;
+        }
+
+        @keyframes floatArche {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
         }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
@@ -57,15 +79,21 @@
 
 <div class="landing-container">
     <div class="hero-content" id="mainHero">
-        <p class="welcome-text">Bienvenue à l'invitation de</p>
+
+        <!-- Bloc Arche Photo ajouté -->
+        <div class="photo-arche">
+            <img src="Nb.jpg" alt="Clara & Grégory">
+        </div>
+
         <h1>Clara <span class="ampersand">&</span> Grégory</h1>
-        <div class="date-hero">26 Juillet 2026</div>
+
         <div class="countdown">
             <div class="count-item"><span class="count-number" id="days">00</span><span class="count-label">Jours</span></div>
             <div class="count-item"><span class="count-number" id="hours">00</span><span class="count-label">Heures</span></div>
             <div class="count-item"><span class="count-number" id="mins">00</span><span class="count-label">Min</span></div>
             <div class="count-item"><span class="count-number" id="secs">00</span><span class="count-label">Sec</span></div>
         </div>
+
         <button onclick="transitionToInvite()" class="enter-btn">Ouvrir l’invitation</button>
     </div>
 </div>
