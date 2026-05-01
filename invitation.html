@@ -36,7 +36,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- NAVIGATION --- */
         nav {
             position: fixed; top: 0; width: 100%; z-index: 1000;
             background: rgba(255, 255, 255, 0.9);
@@ -58,7 +57,6 @@
             display: flex; flex-direction: column; gap: 40px;
         }
 
-        /* --- STYLE DES CARTES --- */
         .card {
             position: relative;
             width: 100%;
@@ -77,7 +75,7 @@
         }
 
         .card-content {
-            width: 80%; /* Largeur réduite pour rester dans la zone centrale sans fleurs */
+            width: 80%;
             max-width: 280px;
             z-index: 2;
             display: flex;
@@ -93,9 +91,14 @@
             letter-spacing: 1.5px;
             font-size: 0.58rem;
             color: #666;
-            line-height: 1.8;
+            line-height: 1.6;
             margin: 10px 0;
+            display: flex;
+            justify-content: center;
+            width: 100%;
         }
+
+        .parents-col { padding: 0 8px; }
 
         .small-separator {
             width: 20px;
@@ -114,10 +117,12 @@
         .date-month { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; }
 
         .location-text { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.2px; line-height: 1.5; color: #333; }
-        .v-h-text { font-style: italic; font-size: 0.85rem; color: var(--gold-flowers); }
+        .time-highlight { font-size: 1.1rem; font-weight: 700; color: #1a1a1a; display: block; margin-bottom: 5px; }
+
+        .v-h-text { font-style: italic; font-size: 0.85rem; color: var(--gold-flowers); margin-top: 10px; }
 
         .btn-action {
-            padding: 10px 20px; border: 1px solid #1a1a1a; text-decoration: none;
+            margin-top: 15px; padding: 10px 20px; border: 1px solid #1a1a1a; text-decoration: none;
             color: #1a1a1a; font-size: 0.6rem; text-transform: uppercase;
             letter-spacing: 2px; background: rgba(255,255,255,0.4); align-self: center;
         }
@@ -129,50 +134,57 @@
             text-decoration: underline; margin-top: 5px;
         }
 
-        /* --- HOMMAGE --- */
         .hommage-section { padding: 20px 10px; text-align: center; display: flex; justify-content: center; }
         .hommage-content { max-width: 350px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
         .hommage-line { width: 30px; height: 1px; background-color: var(--gold-flowers); opacity: 0.5; }
         .hommage-intro { font-family: var(--font-main); font-style: italic; font-size: 0.9rem; color: #777; line-height: 1.4; }
         .hommage-names { font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 1.2px; font-size: 0.6rem; font-weight: 500; color: var(--gold-flowers); line-height: 1.7; }
 
-        /* --- FORMULAIRE --- */
-        .form-group { margin-bottom: 20px; text-align: center; }
-        .form-label {
-            display: block; font-family: 'Montserrat', sans-serif; font-size: 0.65rem;
-            text-transform: uppercase; letter-spacing: 2px; color: var(--gold-flowers);
-            margin-bottom: 12px; font-weight: 700;
+        .input-box {
+            width: 100%;
+            border: 1px solid rgba(168, 155, 133, 0.3);
+            background-color: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(2px);
+            padding: 10px;
+            font-family: var(--font-main);
+            font-size: 1rem;
+            color: var(--text-color);
+            outline: none;
+            text-align: center;
+            border-radius: 8px;
+            transition: background-color 0.3s;
         }
-        .input-underline {
-            width: 100%; border: none; border-bottom: 1px solid #CCC;
-            padding: 8px 0; font-family: var(--font-main); font-size: 1.1rem;
-            background: transparent; outline: none; text-align: center;
-            border-radius: 0;
-        }
-        textarea.input-underline { min-height: 60px; resize: none; line-height: 1.4; }
-        .chips-group { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .input-box:focus { background-color: rgba(255, 255, 255, 0.9); border-color: var(--gold-flowers); }
+
+        .chips-group { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
         .chip-item input { display: none; }
         .chip-label {
-            display: inline-block; padding: 8px 18px; border: 1px solid #DDD;
-            font-family: 'Montserrat', sans-serif; font-size: 0.6rem; text-transform: uppercase;
-            cursor: pointer; border-radius: 20px; color: #888; background: white;
+            display: inline-block; padding: 6px 14px; border: 1px solid #DDD;
+            font-family: 'Montserrat', sans-serif; font-size: 0.55rem; text-transform: uppercase;
+            cursor: pointer; border-radius: 20px; color: #888; background: white; transition: 0.3s;
         }
         .chip-item input:checked + .chip-label { background: var(--gold-flowers); border-color: var(--gold-flowers); color: white; }
-        #other-guests-wrap { display: none; margin-top: 15px; }
+
         .btn-submit-luxury {
             width: 100%; padding: 16px; background-color: #1a1a1a; color: white;
             border: none; font-family: var(--font-serif); text-transform: uppercase;
-            letter-spacing: 3px; font-size: 0.8rem; cursor: pointer;
+            letter-spacing: 3px; font-size: 0.8rem; cursor: pointer; margin-top: 10px;
         }
 
         .reveal { opacity: 0; transform: translateY(20px); transition: 1s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
-        .music-btn { position: fixed; bottom: 20px; right: 20px; z-index: 999; width: 40px; height: 40px; border-radius: 50%; background: white; border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; }
+
+        /* BOUTON MUSIQUE FIXE */
+        .music-btn { position: fixed; bottom: 20px; right: 20px; z-index: 9999; width: 45px; height: 45px; border-radius: 50%; background: white; border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; }
+
+        .interactive-block { display: none; margin-top: 15px; animation: fadeIn 0.4s ease-in; }
+        .other-input-wrap { display: none; margin-top: 10px; animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
 
-<audio id="bg-music" loop><source src="musique3.mp3" type="audio/mpeg"></audio>
+<audio id="bg-music" loop><source src="Mazal.mp3" type="audio/mpeg"></audio>
 <button id="music-toggle" class="music-btn" onclick="toggleMusic()"><i class="fa-solid fa-play"></i></button>
 
 <nav>
@@ -187,30 +199,58 @@
     <div id="mairie" class="card reveal">
         <div class="card-content">
             <div class="together-text">Mairie</div>
-
-            <div class="parents-names-top">
-                <p>Marie & Hervé Krissi</p>
-                <p>Daisy Krissi</p>
-                <div class="small-separator"></div>
-                <p>Martine & Jacky Haddad</p>
-            </div>
-
+            <br>
             <div class="couple-names">Clara<br>&<br>Grégory</div>
             <div class="sub-invite" style="color:var(--gold-flowers); font-weight:700; margin-top: 5px;">Mariage Civil</div>
-
             <div class="date-container">
-                <div class="date-month">Juillet</div>
+                <div class="date-month">Lundi</div>
                 <div class="date-line"></div>
                 <div class="date-day">13</div>
                 <div class="date-line"></div>
-                <div class="date-month">2026</div>
+                <div class="date-month">Juillet</div>
             </div>
-
-            <div class="location-text">Mairie du 16ème Arrondissement<br>À 14h30</div>
+            <div class="location-text">
+                <span class="time-highlight">À 14h30</span>
+                Mairie du 16ème Arrondissement<br>71 Avenue Henri Martin, Paris
+            </div>
             <div class="v-h-text">Suivie d'un Vin d'Honneur</div>
-
             <a href="https://waze.com/ul?q=Mairie%20du%2016e%20Paris" target="_blank" class="btn-action">Localisation</a>
-            <button class="btn-calendar" onclick="addToCalendar('Mariage Civil Clara & Grégory', '20260713T143000', '20260713T170000', 'Mairie du 16ème, Paris', 'Mariage civil suivi du vin d\'honneur.')">
+            <button class="btn-calendar" onclick="addToCalendar('Mariage Civil Clara & Grégory', '20260713T143000', '20260713T170000', 'Mairie du 16ème, Paris', 'Mariage civil.')">
+                <i class="fa-regular fa-calendar-plus"></i> Ajouter
+            </button>
+        </div>
+    </div>
+
+    <!-- CARTE HOUPPA -->
+    <div id="houppa" class="card reveal">
+        <div class="card-content">
+            <div class="together-text">Union</div>
+            <div class="parents-names-top">
+                <div class="parents-col" style="text-align: right;">
+                    <p style="font-weight: 700; color: #1a1a1a;">Marie & Hervé Krissi</p>
+                    <p style="font-weight: 700; color: #1a1a1a;">Daisy Krissi</p>
+                </div>
+                <div style="width: 1px; height: 35px; background: var(--gold-flowers); opacity: 0.3; margin: 0 4px;"></div>
+                <div class="parents-col" style="text-align: left;">
+                    <p style="font-weight: 700; color: #1a1a1a;">Martine & Jacky Haddad</p>
+                </div>
+            </div>
+            <div class="small-separator"></div>
+            <div class="sub-invite">Sous la Houppa</div>
+            <div class="couple-names">Clara<br>&<br>Grégory</div>
+            <div class="date-container">
+                <div class="date-month">Dimanche</div>
+                <div class="date-line"></div>
+                <div class="date-day">26</div>
+                <div class="date-line"></div>
+                <div class="date-month">Juillet</div>
+            </div>
+            <div class="location-text">
+                <span class="time-highlight">À 17h30</span>
+                <strong>Château du Bois du Rocher</strong><br>Jouy-en-Josas
+            </div>
+            <a href="https://waze.com/ul?q=Chateau%20du%20Bois%20du%20Rocher" target="_blank" class="btn-action">Localisation</a>
+            <button class="btn-calendar" onclick="addToCalendar('Mariage Clara & Grégory - Houppa', '20260726T173000', '20260727T040000', 'Château du Bois du Rocher', 'Cérémonie.')">
                 <i class="fa-regular fa-calendar-plus"></i> Ajouter
             </button>
         </div>
@@ -229,70 +269,38 @@
         </div>
     </div>
 
-    <!-- CARTE HOUPPA -->
-    <div id="houppa" class="card reveal">
-        <div class="card-content">
-            <div class="together-text">Union</div>
-
-            <div class="parents-names-top">
-                <p>Marie & Hervé Krissi</p>
-                <p>Daisy Krissi</p>
-                <div class="small-separator"></div>
-                <p>Martine & Jacky Haddad</p>
-            </div>
-
-            <div class="sub-invite">Sous la Houppa</div>
-            <div class="couple-names">Clara<br>&<br>Grégory</div>
-
-            <div class="date-container">
-                <div class="date-month">Juillet</div>
-                <div class="date-line"></div>
-                <div class="date-day">26</div>
-                <div class="date-line"></div>
-                <div class="date-month">2026</div>
-            </div>
-
-            <div class="location-text"><strong>Château du Bois du Rocher</strong><br>Jouy-en-Josas À 17h30</div>
-
-            <a href="https://waze.com/ul?q=Chateau%20du%20Bois%20du%20Rocher" target="_blank" class="btn-action">Localisation</a>
-            <button class="btn-calendar" onclick="addToCalendar('Mariage Clara & Grégory - Houppa', '20260726T173000', '20260727T040000', 'Château du Bois du Rocher, Jouy-en-Josas', 'Cérémonie sous la Houppa.')">
-                <i class="fa-regular fa-calendar-plus"></i> Ajouter
-            </button>
-        </div>
-    </div>
-
     <!-- RSVP -->
     <div id="confirmation" class="card reveal">
         <div class="card-content">
             <div class="together-text" style="font-size: 2rem;">R.S.V.P</div>
-            <div class="sub-invite" style="margin-bottom: 10px;">Votre réponse avant le 01.06</div>
-
-            <form id="rsvpForm">
+            <form id="rsvpForm" style="width: 100%;">
                 <div class="form-group">
                     <label class="form-label">Votre Nom & Prénom</label>
-                    <input type="text" class="input-underline" placeholder="Ecrivez ici..." required>
+                    <input type="text" class="input-box" placeholder="Ecrivez ici..." required>
+                </div>
+                <!-- Mairie -->
+                <div class="form-group">
+                    <p class="rsvp-section-title">Mariage Civil (Mairie)</p>
+                    <div class="chips-group">
+                        <label class="chip-item"><input type="radio" name="presence_mairie" value="oui" required><span class="chip-label">Oui</span></label>
+                        <label class="chip-item"><input type="radio" name="presence_mairie" value="non"><span class="chip-label">Non</span></label>
+                    </div>
+                </div>
+                <!-- Houppa -->
+                <div class="form-group">
+                    <p class="rsvp-section-title">Cérémonie & Soirée (Houppa)</p>
+                    <div class="chips-group">
+                        <label class="chip-item"><input type="radio" name="presence_houppa" value="oui" required><span class="chip-label">Oui</span></label>
+                        <label class="chip-item"><input type="radio" name="presence_houppa" value="non"><span class="chip-label">Non</span></label>
+                    </div>
+                    <div id="houppa-interactive" class="interactive-block">
+                        <label class="form-label">Nombre de personnes</label>
+                        <input type="number" name="guests_houppa" class="input-box" placeholder="0" min="1">
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Serez-vous des nôtres ?</label>
-                    <div class="chips-group">
-                        <label class="chip-item"><input type="radio" name="presence" value="oui" required><span class="chip-label">Avec joie</span></label>
-                        <label class="chip-item"><input type="radio" name="presence" value="non"><span class="chip-label">Hélas non</span></label>
-                    </div>
-                </div>
-                <div id="guest-details">
-                    <div class="form-group">
-                        <label class="form-label">Nombre de personnes</label>
-                        <div class="chips-group">
-                            <label class="chip-item"><input type="radio" name="guests" value="1" checked><span class="chip-label">1</span></label>
-                            <label class="chip-item"><input type="radio" name="guests" value="2"><span class="chip-label">2</span></label>
-                            <label class="chip-item"><input type="radio" name="guests" value="autre"><span class="chip-label">Autre</span></label>
-                        </div>
-                        <div id="other-guests-wrap"><input type="number" id="other-guests-input" class="input-underline" placeholder="Précisez le nombre"></div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Un petit mot pour les mariés ?</label>
-                        <textarea class="input-underline" rows="2" placeholder="Laissez votre message ici..."></textarea>
-                    </div>
+                    <label class="form-label">Un petit mot ?</label>
+                    <textarea class="input-box" rows="2" placeholder="Laissez votre message..."></textarea>
                 </div>
                 <button type="submit" class="btn-submit-luxury">Confirmer</button>
             </form>
@@ -302,24 +310,49 @@
 
 <script>
     const audio = document.getElementById("bg-music");
+    const toggleBtn = document.getElementById("music-toggle");
     let isPlaying = false;
+
+    // Déclencher la musique au premier clic, touche ou défilement
+    function autoPlayMusic() {
+        if (!isPlaying) {
+            audio.play().then(() => {
+                isPlaying = true;
+                toggleBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+            }).catch(e => console.log("Lecture auto bloquée par le navigateur"));
+        }
+        // Retirer les écouteurs une fois lancé
+        document.removeEventListener('click', autoPlayMusic);
+        document.removeEventListener('touchstart', autoPlayMusic);
+        document.removeEventListener('scroll', autoPlayMusic);
+    }
+
+    document.addEventListener('click', autoPlayMusic);
+    document.addEventListener('touchstart', autoPlayMusic);
+    document.addEventListener('scroll', autoPlayMusic);
+
     function toggleMusic() {
-        if (isPlaying) { audio.pause(); document.getElementById("music-toggle").innerHTML = '<i class="fa-solid fa-play"></i>'; }
-        else { audio.play(); document.getElementById("music-toggle").innerHTML = '<i class="fa-solid fa-pause"></i>'; }
+        if (isPlaying) {
+            audio.pause();
+            toggleBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+        } else {
+            audio.play();
+            toggleBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+        }
         isPlaying = !isPlaying;
     }
 
+    // Reveal Effect
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); });
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    document.querySelectorAll('input[name="guests"]').forEach(radio => {
-        radio.addEventListener('change', function() { document.getElementById('other-guests-wrap').style.display = (this.value === 'autre') ? 'block' : 'none'; });
-    });
-
-    document.querySelectorAll('input[name="presence"]').forEach(radio => {
-        radio.addEventListener('change', function() { document.getElementById('guest-details').style.display = (this.value === 'non') ? 'none' : 'block'; });
+    // RSVP Logic
+    document.querySelectorAll('input[name="presence_houppa"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            document.getElementById('houppa-interactive').style.display = (this.value === 'oui') ? 'block' : 'none';
+        });
     });
 
     function addToCalendar(title, start, end, location, description) {
